@@ -5,6 +5,7 @@ import App from './App'
 import store from './store'
 import router from './router'
 // import '@/utils/permission' // 检测token
+import '../static/js/flexible';
 
 Vue.config.productionTip = false
 

@@ -1,11 +1,10 @@
 <template>
   <div id="app">
-    <!-- <img src="./assets/logo.png"> -->
     <router-view/>
   </div>
 </template>
 
-<script>
+<script> 
 export default {
   name: 'App',
   data() {
@@ -16,7 +15,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
+@import "./common/style/base"; 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

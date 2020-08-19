@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-08-19 10:17:31
- * @LastEditTime: 2020-08-19 16:30:04
+ * @LastEditTime: 2020-08-19 17:06:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-app\src\views\HelloWorld\index.vue
@@ -43,8 +43,7 @@ export default {
     }
   },
   created(){
-     //已经能打印出来了
-    console.log('----jquery--', $)
+
   },
   methods: {
     clickItem() {

@@ -11,9 +11,13 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "jquery": "^3.5.1",
+    "jquery-weui": "^1.2.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vuex": "^3.5.1"
+    "vuex": "^3.5.1",
+    "weui": "^2.3.0",
+    "weui.js": "^1.2.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

@@ -7,9 +7,9 @@ const _axios = axios.create({
   baseURL: process.env.BASE_URL,
   // withCredentials: true,
   timeout: 30000,
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-  }
+  // headers: {
+  //   "Access-Control-Allow-Origin": "*",
+  // }
 })
 
 // request拦截器

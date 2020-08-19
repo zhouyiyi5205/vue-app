@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/pages/HelloWorld'
-import Home from '@/pages/Home'
+import HelloWorld from '@/views/HelloWorld'
+import Home from '@/views/Home'
 Vue.use(Router)
 
 export default new Router({
@@ -10,7 +10,7 @@ export default new Router({
       path: '/HelloWorld',
       name: 'HelloWorld',
       component: HelloWorld
-      // component: (resolve) => require(['@pages/HelloWorld'], resolve)
+      // component: (resolve) => require(['@/views/HelloWorld'], resolve)
     },
     {
       path: '/Home',

@@ -1,39 +1,63 @@
-<!--
- * @Author: zhouyajuan
- * @Date: 2020-08-19 10:18:21
- * @LastEditTime: 2020-08-19 17:22:34
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \vue-app\src\views\Home\index.vue
--->
 <template>
   <div class="home-page">
-    <div class="weui-flex home-page-header">
-      <div class="weui-flex__item left wpgicon icon-ic_arrow_bac">X</div>
-      <div class="weui-flex__item">掌上营业厅</div>
-      <div class="weui-flex__item">...</div>
-    </div>
+<!-- 
+    <van-cell is-link @click="showPopup">展示弹出层</van-cell>
+    <van-popup v-model="show">内容</van-popup> -->
+
+    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+      <van-swipe-item>1</van-swipe-item>
+      <van-swipe-item>2</van-swipe-item>
+      <van-swipe-item>3</van-swipe-item>
+      <van-swipe-item>4</van-swipe-item>
+    </van-swipe>
+
+    <van-grid>
+      <van-grid-item icon="photo-o" text="文字" />
+      <van-grid-item icon="photo-o" text="文字" />
+      <van-grid-item icon="photo-o" text="文字" />
+      <van-grid-item icon="photo-o" text="文字" />
+    </van-grid>
+
+    <van-button type="primary">主要按钮</van-button>
+    <van-button type="info">信息按钮</van-button>
+    <van-button type="default">默认按钮</van-button>
+    <van-button type="warning">警告按钮</van-button>
+
   </div>
 </template>
 
 <script>
+import { Button, Popup } from 'vant';
+
 export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      show: false,
     }
+  },
+  methods: {
+    showPopup() {
+      console.log('PPP---')
+      this.show = true;
+    },
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
-.home-page-header {
+.home-page {
   line-height: 40px;
   height: 40px;
-  .left {
-    background-color: red;
+  font-size: 16px;
+  .my-swipe .van-swipe-item {
+    color: #fff;
+    font-size: 20px;
+    line-height: 150px;
+    text-align: center;
+    background-color: #39a9ed;
   }
+
 }
 </style>

@@ -26,8 +26,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
-      'jquery': 'jquery'  // 如果是自己下载的jq文件，则用下面方式修改为存放目录
+      '@': resolve('src')
     }
   },
   module: {

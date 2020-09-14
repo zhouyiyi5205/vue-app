@@ -11,10 +11,14 @@
   // "plugins": ["transform-vue-jsx", "transform-runtime"]
   // 改动：
   "plugins": [
-    // ["import", {
-    //   "libraryName": "vant",
-    //   "libraryDirectory": "es",
-    //   "style": true
-    // }]
+    [
+      "transform-runtime",
+      {
+        "helpers": false,
+        "polyfill": false,
+        "regenerator": true,
+        "moduleName": "babel-runtime"
+      }
+    ]
   ]
 }

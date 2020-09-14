@@ -8,14 +8,14 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Home',
+      component: Home
       // component: (resolve) => require(['@/views/HelloWorld'], resolve)
     },
     {
-      path: '/Home',
-      name: 'Home',
-      component: Home
+      path: '/HelloWorld',
+      name: 'HelloWorld',
+      component: HelloWorld
     },
   ]
 })

@@ -23,3 +23,12 @@ export function selectMonthRestrictionsFiling() {
     method: 'get'
   })
 }
+
+export function selectAreaWaterVolume(params) {
+  return request({
+    url: `/admin/waterVolumeReport/selectAreaWaterVolume`,
+    method: 'post',
+    data: params
+  })
+}
+// ---------- 以上示例 可删除 ----------

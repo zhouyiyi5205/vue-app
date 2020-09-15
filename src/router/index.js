@@ -10,7 +10,6 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
-      // component: (resolve) => require(['@/views/HelloWorld'], resolve)
     },
     {
       path: '/HelloWorld',

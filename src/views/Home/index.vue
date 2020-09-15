@@ -1,7 +1,7 @@
 <!--
  * @Author: zhouyajuan
  * @Date: 2020-08-20 08:21:56
- * @LastEditTime: 2020-09-15 09:14:45
+ * @LastEditTime: 2020-09-15 10:42:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-app-vant\src\views\Home\index.vue
@@ -13,27 +13,35 @@
                 <div class="imgDiv">
                     <img src="../../assets/avatar.png" alt="">
                 </div>
-                <span>{{datainfo.name}}</span>
+                <span>{{dataInfo.name}}</span>
             </div>
             <div class="rightSeting">
                 <van-icon name="setting-o" />
             </div>
         </div>
-        <div class="home-title-info">
+
+        <div class="home-title-info" v-if="dataInfo.islogoin">
             <div class="time-info">
                 <span>数据截止统计</span>
-                <em>{{datainfo.time}}</em>
+                <em>{{dataInfo.time}}</em>
                 <van-icon name="info-o" />
                 <span>数据说明</span>
             </div>
             <div class="pay-info">
                 <p>未缴账单</p>
-                <span>¥ {{datainfo.amountMoney}}</span>
+                <span>¥ {{dataInfo.amountMoney}}</span>
                 <div class="quick-payment">
                     快捷缴费
                 </div>
             </div>
         </div>
+        
+        <div class="home-title-noInfo" v-else>
+            <p>您还未绑定任何水表</p>
+            <p>立即绑定享受用水的便捷之旅吧~</p>
+        </div>
+
+
         <div class="myWater">
             <div class="myWater-content">
                 <span class="title">我的用水</span>
@@ -115,10 +123,11 @@ export default {
   data () {
     return {
       show: false,
-      datainfo: {
+      dataInfo: {
         name: '刘保军',
         time: '2020.9.11 14:06',
         amountMoney: '1,172.80',
+        islogoin: false,
       },
       authorInfo: [
         { num: '15', numinfo: '9月份水量', isUnit: true },
@@ -265,6 +274,16 @@ export default {
             }
         }
     }
+    .home-title-noInfo {
+        margin: 0px 15px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background: linear-gradient(to right,#3481ff, #36b1ff); 
+        font-size: 14px;
+        line-height: 28px;
+        color: #ffffff;
+        padding: 10px;
+    }
     .myWater {
         background-color: #fdfdfd;
         border-top-left-radius: 5px;
@@ -348,6 +367,7 @@ export default {
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
+                        font-family:"Times New Roman", Times, serif;
                     }
                     .warningIcon {
                         color: #f64357;

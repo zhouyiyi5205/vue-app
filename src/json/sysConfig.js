@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2020-09-09 14:34:09
- * @LastEditTime: 2020-09-15 09:16:35
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \water-monitor-management\src\json\sysConfig.js
- */
 export function sysConfig() {
   // const evn = 0; //0代表开发环境，1是正式环境,2是测试环境
   const env = process.env.BUILD_ENV;

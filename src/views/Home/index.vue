@@ -1,7 +1,7 @@
 <!--
  * @Author: zhouyajuan
  * @Date: 2020-08-20 08:21:56
- * @LastEditTime: 2020-09-15 10:42:58
+ * @LastEditTime: 2020-09-15 10:59:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-app-vant\src\views\Home\index.vue
@@ -127,7 +127,7 @@ export default {
         name: '刘保军',
         time: '2020.9.11 14:06',
         amountMoney: '1,172.80',
-        islogoin: false,
+        islogoin: true,
       },
       authorInfo: [
         { num: '15', numinfo: '9月份水量', isUnit: true },
@@ -198,6 +198,9 @@ export default {
         height: 40px;
         line-height: 40px;
         margin-bottom: 5px;
+        position: fixed;
+        background-color: #F5F5F5;
+        z-index: 99;
         .leftInfo {
             float: left;
             .imgDiv {
@@ -230,6 +233,7 @@ export default {
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
         background: linear-gradient(to right,#3481ff, #36b1ff);
+        padding-top: 42px;
         .time-info {
             height: auto;
             color: #6aa9ff;

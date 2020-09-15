@@ -1,7 +1,7 @@
 <!--
  * @Author: zhouyajuan
  * @Date: 2020-08-20 08:21:56
- * @LastEditTime: 2020-09-15 08:23:32
+ * @LastEditTime: 2020-09-15 09:14:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-app-vant\src\views\Home\index.vue
@@ -108,7 +108,7 @@
 
 <script>
 import { Button, Popup, Icon } from 'vant';
-
+import { selectMonthRestrictionsFiling } from '../../api/home';
 
 export default {
   name: 'Home',
@@ -156,10 +156,18 @@ export default {
     }
   },
   mounted() {
-
+      this.initFn();
   },
   methods: {
+    async initFn () {
+      // 限制日期
+      const { status, resultData, errorMessage } = await selectMonthRestrictionsFiling()
+      if (status === 'complete') {
+        console.log('YYY---', resultData)
+      } else {
 
+      }
+    },
     showPopup() {
       this.show = true;
     },

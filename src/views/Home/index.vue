@@ -1,7 +1,7 @@
 <!--
  * @Author: zhouyajuan
  * @Date: 2020-08-20 08:21:56
- * @LastEditTime: 2020-09-14 17:05:40
+ * @LastEditTime: 2020-09-15 08:23:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-app-vant\src\views\Home\index.vue
@@ -108,7 +108,7 @@
 
 <script>
 import { Button, Popup, Icon } from 'vant';
-import { getSysMenuList as apiGetSysMenuList } from '../../api/api';
+
 
 export default {
   name: 'Home',
@@ -156,16 +156,10 @@ export default {
     }
   },
   mounted() {
-      this.getMenuList();
+
   },
   methods: {
-    // 获取菜单列表
-    async getMenuList() {
-        this.menuList = await apiGetSysMenuList({
-            productId: this.menuTypeId,
-            keyword: this.keyword
-        });
-    },
+
     showPopup() {
       this.show = true;
     },

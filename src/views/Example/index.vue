@@ -19,16 +19,20 @@
         </van-steps>
     </div> -->
 
+<!-- 
     <van-grid>
       <van-grid-item icon="photo-o" text="文字" />
       <van-grid-item icon="photo-o" text="文字" />
       <van-grid-item icon="photo-o" text="文字" />
       <van-grid-item icon="photo-o" text="文字" />
-    </van-grid>
+    </van-grid> -->
     
     <!-- 图表 -->
-    <bar-chart :option="chartTwoOption" chart-id="chartTwo" style="height:330px" />
+    <div class="chart-box">
+        <bar-chart :option="chartTwoOption" chart-id="chartTwo" style="height:330px" />
+    </div>
 
+    <!-- 当前的进度条 -->
     <div class="steps-content">
         <ul>
             <li v-for="(item, index) in stepsContent" :key="index">
@@ -37,33 +41,6 @@
             </li>
         </ul>
     </div>
-
-    <!-- 身份证上传 -->
-    <input type="file" accept="image/*" class="file" ref="file" @change="upload"/>
-    <van-button type="primary"  @click="clickFunc" size="mini">主要按钮</van-button>
-
-    <canvas :width="CW" :height="CH" ref="canvas"></canvas>
-    
-    <!-- <div class="showlist">
-        <div v-for="(item,index) in result_list" class="list" :key="index">
-            <div class="index">{{index+1}}</div>
-            <div class="pre">{{item.pre}}</div>
-            <div class="text">{{item.text}}</div>
-        </div>
-    </div> -->
-
-    <div class="showlist">
-        <ul>
-            <li v-for="(item,index) in result_list" class="list" :key="index">
-                <span>{{index+1}}</span>
-                <span>{{item.pre}}</span>
-                <span>{{item.text}}</span>
-            </li>
-        </ul>
-    </div>
-    
-    <!-- <Canvas @upload="upload" :result_show="result_title"
-        :list="result_list" :show="loading" :err="err"></Canvas> -->
 
   </div>
 </template>
@@ -116,72 +93,40 @@ export default {
                 }
             }
             },
-            xAxis: [
-            {
+            xAxis: [{
                 data: [],
                 axisPointer: { type: 'shadow' }
-            }
-            ],
+            }],
             yAxis: [
-            {
-                type: 'value',
-                name: '用水总量(m³)',
-                axisLabel: {
-                    formatter: '{value} m³',
-                    color: '#333'
+                {
+                    type: 'value',
+                    name: '用水总量(m³)',
+                    axisLabel: { formatter: '{value} m³', color: '#333' },
+                    axisTick: { show: false },
+                    axisLine: { show: false }
                 },
-                axisTick: { show: false },
-                axisLine: { show: false }
-            },
-            {
-                type: 'value',
-                name: '上报率(%)',
-                // smooth:false,   //关键点，为true是不支持虚线的，实线就用true
-                axisLabel: {
-                formatter: '{value} %',
-                color: '#333'
-                },
-                axisTick: {
-                show: false
-                },
-                axisLine: {
-                show: false
+                {
+                    type: 'value',
+                    name: '上报率(%)',
+                    axisLabel: { formatter: '{value} %', color: '#333' },
+                    axisTick: { show: false },
+                    axisLine: { show: false }
                 }
-            }
             ],
             series: [
-            {
-                name: '用水总量(m³)',
-                type: 'bar',
-                barWidth: '5px',
-                itemStyle: {
-                barBorderRadius: [6, 6, 0, 0]
+                {
+                    name: '用水总量(m³)', type: 'bar', barWidth: '5px',
+                    itemStyle: { barBorderRadius: [6, 6, 0, 0] },
+                    data: []
                 },
-                data: []
-            },
-            {
-                name: '上报率(%)',
-                type: 'line',
-                barWidth: '2px',
-                itemStyle: {
-                barBorderRadius: [6, 6, 0, 0]
-                },
-                yAxisIndex: 1,
-                data: []
-            }
+                {
+                    name: '上报率(%)', type: 'line', barWidth: '2px',
+                    itemStyle: { barBorderRadius: [6, 6, 0, 0] },
+                    yAxisIndex: 1,
+                    data: []
+                }
             ]
-        },
-        // ---- 身份证 ----
-            CW: '300px',
-            CH: '300px',
-            result_title:'身份证OCR识别结果',
-            detail:['type','name','gender',
-                'nationality','birth','address','id','valid_date','authority'],
-            result_list:[],
-            pre:['正反面：','名字：','性别：','民族：',
-                '出生年月：','地址：','身份证号：','有效日期：','签证机关：'],
-            loading:false,
-            err:false
+        }
     }
   },
   mounted() {
@@ -216,113 +161,7 @@ export default {
     },
     showPopup() {
       this.show = true;
-    },
-    // ---------- 身份证上传 ----------
-    clickFunc() {
-        // 触发FILE选择文件的操作
-        this.$refs.file.click();
-    },
-    upload(){
-          // console.log(file)
-          let file = this.$refs.file.files[0];
-          let canvas = this.$refs.canvas;
-          if (!file) return;
-          this.loading=true
-          // 先基于FileReader进行文件的读取
-          let fileExample = new FileReader();
-          // console.dir(fileExample)
-          fileExample.readAsDataURL(file);
-          fileExample.onload = ev => {
-            // 创建新图片
-            // console.dir(ev)
-            this.IMAGE = new Image();
-            this.IMAGE.src = ev.target.result;
-            this.IMAGE.onload = () => {
-              this.IW = this.IMAGE.width;
-              this.IH = this.IMAGE.height;
-              const NCW = parseInt(this.CW);
-              const NCH = parseInt(this.CW);
-              // 重新按照比例计算宽高
-              let n = 1;
-              if (this.IW > this.IH) {
-                n = this.IW / NCW;
-                this.IW = NCW;
-                this.IH = this.IH / n;
-              } else {
-                n = this.IH / NCH;
-                this.IH = NCH;
-                this.IW = this.IW / n;
-              }
-              this.IL = (NCW - this.IW) / 2;
-              this.IT = (NCH - this.IH) / 2;
-              // 绘制图片
-              this.CTX = canvas.getContext("2d");
-              // 清空画布
-              this.CTX.clearRect(0, 0, parseInt(this.CW), parseInt(this.CH));
-              // 绘制图片
-              this.CTX.drawImage(this.IMAGE, this.IL, this.IT, this.IW, this.IH);
-
-              //上传文件1
-              console.log('上传文件前---', file)
-              this.uploadImg(file)
-            };
-          }
-        },
-        uploadImg(file) {
-          var forms = new FormData();
-          forms.append('file', file)
-          let config = {
-            headers: {'Content-Type': 'multipart/form-data'}
-          };
-        //   console.log('vvvv---', this.$axios)
-          axios.post('https://mp.weixin.qq.com/wxamusic/ocr/idcard?action=idcard&type=photo&test_sign=yi_ke_shi_ge_sha_diao', forms, config)
-            .then(res => {
-              console.log(res);
-              this.loading=false;
-              // this.driving = res.data.ocrcomm_res.items
-              const data=res.data;
-              if (data.hasOwnProperty("result")) {
-                this.err=false;
-                let result = data.result;
-                let data_to_set = [];
-                for (let i = 0; i < this.detail.length; i++) {
-                  let result_key = this.detail[i];
-                  if (result.hasOwnProperty(result_key)) {
-                    data_to_set.push( result[result_key]);
-                  }
-                }
-                console.log(data_to_set)
-                this.result_list=[].concat(data_to_set);
-                console.log(this.result_list)
-                  if(result['type']===0){
-                      let obj={};
-                      obj.pre=this.pre[0]
-                      obj.text='正面';
-                      this.result_list[0]=obj;
-                      // this.result_list[0].text="正面";
-                      for(let j=1;j<this.result_list.length;j++){
-                          this.result_list[j].pre=this.pre[j]
-                      }
-                  }
-                  else{
-                      let obj={};
-                      obj.pre=this.pre[0]
-                      obj.text='反面';
-                      this.result_list[0]=obj;
-                      this.result_list[1].pre=this.pre[7]
-                      this.result_list[2].pre=this.pre[8]
-                  }
-
-              }else{
-                this.result_list=[];
-                this.err=true
-              }
-            })
-            .catch(err => {
-              //补充异常处理代码
-              console.log(err)
-            })
-        },
+    }
   }
 }
 </script>
@@ -330,27 +169,30 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
 .home-page {
-  line-height: 40px;
-  height: 40px;
-  font-size: 16px;
-  .my-swipe .van-swipe-item {
-    color: #fff;
-    font-size: 20px;
-    line-height: 150px;
-    text-align: center;
-    background-color: #39a9ed;
-  }
-  .stepsDiv {
+    line-height: 40px;
+    height: 40px;
+    font-size: 16px;
+    .my-swipe .van-swipe-item {
+        color: #fff;
+        font-size: 20px;
+        line-height: 150px;
+        text-align: center;
+        background-color: #39a9ed;
+    }
+    .stepsDiv {
         width: 90%;
         margin: 0 auto;
         .van-step--horizontal .van-step__title {
             display: block;
         }
-        span:first-child {
-            // float: left;
-        }
-  }
+    }
 }
+// ----- 图表 -----
+.chart-box {
+    margin-top: 20px;
+}
+
+// ----- 当前的进度条 -----
 .steps-content {
     margin-top: 20px;
     ul {
@@ -408,10 +250,14 @@ export default {
         }
     }
 }
-.showlist {
-    li {
-        text-align: left;
-        padding-left: 20px;
+
+// ----- 身份证上传 -----
+.uploadCardID {
+    .showlist {
+        li {
+            text-align: left;
+            padding-left: 20px;
+        }
     }
 }
 </style>

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/views/HelloWorld'
 import Home from '@/views/Home'
 import Example from '@/views/Example'
+import IDCardExample from '@/views/Example/IDCardExample'
 Vue.use(Router)
 
 export default new Router({
@@ -21,6 +22,11 @@ export default new Router({
       path: '/Example',
       name: 'Example',
       component: Example
+    },
+    {
+      path: '/Example/IDCardExample',
+      name: 'IDCardExample',
+      component: IDCardExample
     }
   ]
 })

@@ -26,6 +26,8 @@
       <van-grid-item icon="photo-o" text="文字" />
       <van-grid-item icon="photo-o" text="文字" />
     </van-grid> -->
+
+    <!-- <div class="van-ellipsis">这是一段最多显示一行的文字，多余的内容会被省略这是一段最多显示一行的文字，多余的内容会被省略</div> -->
     
     <!-- 图表 -->
     <div class="chart-box">
@@ -42,13 +44,16 @@
         </ul>
     </div>
 
+    <div class="">
+        <van-cell title="选择日期区间" :value="date" @click="show = true" />
+        <van-calendar v-model="show" type="range" @confirm="onConfirm" color="red"/>
+    </div>
   </div>
 </template>
 
 <script>
-import { Button, Popup, Steps } from 'vant';
+import { Button, Popup, Steps, Calendar } from 'vant';
 import BarChart from '@/components/chart/BarChart';
-// import Canvas from '@/components/Canvas/Canvas';
 import { selectAreaWaterVolume, OCR } from '../../api/home';
 import axios from 'axios'
 
@@ -126,14 +131,16 @@ export default {
                     data: []
                 }
             ]
-        }
+        },
+        date: '',
+        show: false
     }
   },
   mounted() {
     this.selectAreaWaterVolume();
   },
   methods: {
-    // 右下角
+    // 参考的请求
     async selectAreaWaterVolume() {
       const params = {
         oneYear: '2019', // 饼图参数
@@ -161,6 +168,15 @@ export default {
     },
     showPopup() {
       this.show = true;
+    },
+    // ----- 日期 -----
+    formatDate(date) {
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    },
+    onConfirm(date) {
+        const [start, end] = date;
+        this.show = false;
+        this.date = `${this.formatDate(start)} ~ ${this.formatDate(end)}`;
     }
   }
 }
@@ -259,5 +275,8 @@ export default {
             padding-left: 20px;
         }
     }
+}
+.van-cell__title {
+    text-align: left;
 }
 </style>

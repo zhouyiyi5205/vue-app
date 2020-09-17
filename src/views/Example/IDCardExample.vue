@@ -14,11 +14,11 @@
     <div class="uploadCardID">
         <div class="fileInput">
             <input type="file" accept="image/*" class="file" ref="file" @change="upload" style="display:none"/>
-            <van-button type="primary"   size="mini">上传身份证</van-button>
+            <van-button type="primary" @click="clickFunc"  size="mini">上传身份证</van-button>
         </div>
 
         <div class="fileCanvas">
-            <!-- <span v-if="isShowCard" @click="clickFunc">身份证正面照</span> -->
+            <!-- <span v-if="isShowCard" >身份证正面照</span> -->
             <canvas :width="CW" :height="CH" ref="canvas" class="canvas"></canvas>
         </div>
 
@@ -70,6 +70,7 @@ export default {
     }
   },
   mounted() {
+      this.showClick();
   },
   methods: {
     // ---------- 身份证上传 ----------
@@ -100,6 +101,7 @@ export default {
                 const NCH = parseInt(this.CW);
                 // 重新按照比例计算宽高
                 let n = 1;
+                // 宽度 大于 高度
                 if (this.IW > this.IH) {
                     n = this.IW / NCW;
                     this.IW = NCW;
@@ -124,58 +126,75 @@ export default {
             };
         }
     },
-        uploadImg(file) {
-          var forms = new FormData();
-          forms.append('file', file)
-          let config = {
-            headers: {'Content-Type': 'multipart/form-data'}
-          };
-          axios.post('https://mp.weixin.qq.com/wxamusic/ocr/idcard?action=idcard&type=photo&test_sign=yi_ke_shi_ge_sha_diao', forms, config)
+    uploadImg(file) {
+        var forms = new FormData();
+        forms.append('file', file)
+        let config = {
+        headers: {'Content-Type': 'multipart/form-data'}
+        };
+        axios.post('https://mp.weixin.qq.com/wxamusic/ocr/idcard?action=idcard&type=photo&test_sign=yi_ke_shi_ge_sha_diao', forms, config)
             .then(res => {
-              console.log(res);
-              this.loading=false;
-              // this.driving = res.data.ocrcomm_res.items
-              const data = res.data;
-              if (data.hasOwnProperty("result")) {
-                this.err = false;
-                let result = data.result;
-                let data_to_set = [];
-                for (let i = 0; i < this.detail.length; i++) {
-                  let result_key = this.detail[i];
-                  if (result.hasOwnProperty(result_key)) {
-                    data_to_set.push(result[result_key]);
-                  }
-                }
-                console.log(data_to_set)
-                this.result_list=[].concat(data_to_set);
-                console.log(this.result_list)
-                if (result['type'] === 0){
-                    let obj = {};
-                    obj.pre = this.pre[0]
-                    obj.text = '正面';
-                    this.result_list[0]=obj;
-                    // this.result_list[0].text="正面";
-                    for(let j = 1 ;j < this.result_list.length; j++){
-                        this.result_list[j].pre = this.pre[j]
+                console.log(res);
+                this.loading=false;
+                // this.driving = res.data.ocrcomm_res.items
+                const data = res.data;
+                console.log('数据--', data);
+                if (data.hasOwnProperty("result")) {
+                    this.err = false;
+                    let result = data.result;
+                    let data_to_set = [];
+                    for (let i = 0; i < this.detail.length; i++) {
+                        let result_key = this.detail[i];
+                        if (result.hasOwnProperty(result_key)) {
+                            data_to_set.push(result[result_key]);
+                        }
                     }
-                } else{
-                    let obj = {};
-                    obj.pre = this.pre[0]
-                    obj.text='反面';
-                    this.result_list[0] = obj;
-                    this.result_list[1].pre = this.pre[7]
-                    this.result_list[2].pre = this.pre[8]
+                    console.log(data_to_set)
+                    this.result_list=[].concat(data_to_set);
+                
+                    console.log(this.result_list)
+                    if (result['type'] === 0){
+                        let obj = {};
+                        obj.pre = this.pre[0]
+                        obj.text = '正面';
+                        this.result_list[0]=obj;
+                        // this.result_list[0].text="正面";
+                        for(let j = 1 ;j < this.result_list.length; j++){
+                            this.result_list[j].pre = this.pre[j]
+                        }
+                    } else {
+                        let obj = {};
+                        obj.pre = this.pre[0]
+                        obj.text='反面';
+                        this.result_list[0] = obj;
+                        this.result_list[1].pre = this.pre[7]
+                        this.result_list[2].pre = this.pre[8]
+                    }
+                } else {
+                    // 请空画布
+                    // this.CTX.clearRect(0, 0, parseInt(this.CW), parseInt(this.CH));
+                    this.result_list = [];
+                    this.err = true
                 }
-            } else {
-                this.result_list = [];
-                this.err=true
-              }
             })
             .catch(err => {
               //补充异常处理代码
               console.log(err)
             })
         },
+        showClick() {
+            let arr = [{name: '中国', code: '23'}, {name: '新疆', code: '24'}]
+            // let obj = {}
+            // arr.map((item,index) => {
+            //     obj[item.name] = item.code
+            // })
+            // console.log('PP--', obj)
+            // arr.forEach((item, index) => {
+            //     console.log(item)
+            // })
+            const bb = arr.filter((item, index) => { return item.name === '中国' })
+            console.log(bb)
+        }
   }
 }
 </script>
@@ -249,17 +268,12 @@ export default {
         margin-top: 8px;
         width: 100%;
         height: 240px;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 0, 0, 0.3);
         // position: relative;
         span {
             color: #cccccc;
             line-height: 210px;
         }
-    }
-    .canvas {
-        // position: absolute;
-        // top: 55px;
-        // left: 40px;
     }
     .fileList {
         li {

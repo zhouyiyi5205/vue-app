@@ -1,7 +1,7 @@
 <!--
  * @Author: zhouyajuan
  * @Date: 2020-08-20 08:21:56
- * @LastEditTime: 2020-09-15 10:59:08
+ * @LastEditTime: 2020-09-16 15:07:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-app-vant\src\views\Home\index.vue
@@ -41,7 +41,6 @@
             <p>立即绑定享受用水的便捷之旅吧~</p>
         </div>
 
-
         <div class="myWater">
             <div class="myWater-content">
                 <span class="title">我的用水</span>
@@ -57,7 +56,7 @@
                     </div>
                     <div class="current-author-payInfo">
                         <van-icon name="info-o" class="warningIcon"/>
-                        <span>欠费停表：刘大意 户号-61234福州鼓楼区馥郁14栋馥郁14栋馥郁14栋 </span>
+                        <div class="van-ellipsis">欠费停表：刘大意 户号-61234福州鼓楼区馥郁14栋馥郁14栋馥郁14栋 </div>
                         <van-icon name="cross" class="closeIcon"/>
                     </div>
                     <div class="current-author-grid">
@@ -74,7 +73,7 @@
         <div class="business-processing">
             <div class="business-processing-content">
                 <span class="title">业务办理</span>
-                <span class="sub-title">我的办理 <em>99+</em> </span>
+                <span class="sub-title" @click="clickFn">我的办理 <em>99+</em> </span>
                 <div class="business-info">
                     <van-grid column-num="4" :border="false">
                         <van-grid-item use-slot v-for="(item, index) in businessIcon" :key="index" >
@@ -115,7 +114,7 @@
 </template>
 
 <script>
-import { Button, Popup, Icon } from 'vant';
+import { Button, Popup, Icon, Toast } from 'vant';
 import { selectMonthRestrictionsFiling } from '../../api/home';
 
 export default {
@@ -142,15 +141,15 @@ export default {
         { name: '用户绑定', icon: 'setting-o' }
       ],
       businessIcon: [
-        { name: '用水报装', icon: 'location-o', badgeInfo: '待抄表' },
+        { name: '用水报装', icon: 'location-o' },
         { name: '过户更名', icon: 'like-o' },
         { name: '报事报修', icon: 'star-o' },
         { name: '用水性质', icon: 'phone-o' },
-        { name: '阶梯人口', icon: 'location-o', badgeInfo: '待抄表' },
+        { name: '阶梯人口', icon: 'location-o' },
         { name: '低保申请', icon: 'like-o' },
-        { name: '水表报亭', icon: 'star-o' },
+        { name: '水表报停', icon: 'star-o' },
         { name: '水表复装', icon: 'phone-o' },
-        { name: '销户', icon: 'location-o', badgeInfo: '待抄表' },
+        { name: '销户', icon: 'location-o' },
         { name: '移管申请', icon: 'like-o' },
         { name: '水表迁移', icon: 'star-o' },
         { name: '口径变更', icon: 'phone-o' }
@@ -172,7 +171,7 @@ export default {
       // 限制日期
       const { status, resultData, errorMessage } = await selectMonthRestrictionsFiling()
       if (status === 'complete') {
-        console.log('YYY---', resultData)
+        console.log('数据---', resultData)
       } else {
 
       }
@@ -180,6 +179,11 @@ export default {
     showPopup() {
       this.show = true;
     },
+    clickFn () {
+        Toast({
+            message: '文字提示'
+        });
+    }
   }
 }
 </script>
@@ -257,6 +261,7 @@ export default {
             }
             span {
                 font-size: 20px;
+                font-family: fantasy;
             }
             .quick-payment {
                 background-color: rgba(0, 0, 0, 0.3);
@@ -358,26 +363,19 @@ export default {
                     border-bottom: 1px solid #e7e7e7;
                     font-size: 12px;
                     color: #999999;
-                    
                     margin: 15px 15px 0px;
                     text-align: left;
                     position: relative;
-                    span {
-                        text-indent: 1.5em;
+                    div {
                         display: inline-block;
                         height: 28px;
                         line-height: 28px;
                         width: calc(100% - 24px);
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        font-family:"Times New Roman", Times, serif;
                     }
                     .warningIcon {
                         color: #f64357;
-                        position: absolute;
-                        left: 0;
-                        top: 10px;
+                        line-height: 28px;
+                        vertical-align: top;
                     }
                     .closeIcon {
                         position: absolute;

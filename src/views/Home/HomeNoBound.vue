@@ -1,7 +1,7 @@
 <!--
  * @Author: zhouyajuan
  * @Date: 2020-08-20 08:21:56
- * @LastEditTime: 2020-09-21 09:03:28
+ * @LastEditTime: 2020-09-21 09:44:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-app-vant\src\views\Home\index.vue
@@ -84,7 +84,7 @@
                 <div class="business-processing-content">
 
                     <van-cell title="业务办理" is-link>
-                        <span>我的办理</span>
+                        <span class="mgr20">我的办理</span>
                         <em>12</em>
                     </van-cell>
 
@@ -101,7 +101,7 @@
             <div class="feedback">
                 <div class="feedback-content">
                     <van-cell title="我要反馈" is-link>
-                        <span>我的反馈</span>
+                        <span class="mgr20">我的反馈</span>
                         <em>10</em>
                     </van-cell>
 
@@ -731,6 +731,9 @@ export default {
             }
         }
     }
+    .mgr20 {
+        margin-right: 20px;
+    }
 }
 .home-page-noBound {
     .van-cell {
@@ -760,7 +763,6 @@ export default {
             letter-spacing: 0;
         }
         em {
-            margin-left: 20px;
             width: 16px;
             height: 16px; 
             line-height: 18px;

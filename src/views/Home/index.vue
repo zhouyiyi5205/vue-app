@@ -1,7 +1,7 @@
 <!--
  * @Author: zhouyajuan
  * @Date: 2020-08-20 08:21:56
- * @LastEditTime: 2020-09-21 09:03:12
+ * @LastEditTime: 2020-09-21 09:45:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-app-vant\src\views\Home\index.vue
@@ -752,6 +752,9 @@ export default {
             }
         }
     }
+    .mgr20 {
+        margin-right: 20px;
+    }
 }
 .home-page {
     .van-cell {
@@ -795,7 +798,6 @@ export default {
             color: #ffffff;
             top: 4px;
             right: 0px;
-            margin-left: 20px;
         }
     }
 }

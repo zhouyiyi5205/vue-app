@@ -8,7 +8,7 @@
             <van-form @submit="onSubmit">
                 <van-cell-group>
                     <van-field label="缴费单位" placeholder="请选择" v-model="paymentUnit"  readonly  right-icon="arrow" @click="showSelectContent" />
-                    <van-field label="户号" placeholder="请填写或扫码" v-model="accountNumber"  :right-icon="scan" label-class="title_quester"/>
+                    <van-field label="户号" placeholder="请填写或扫码" v-model="accountNumber"  :right-icon="scan" label-class="title_quester" @click-right-icon="getScan"/>
                     <van-row>
                         <van-col span="12">
                             <van-field label="账单验证" placeholder="月份" v-model="billValue"  :right-icon="invertedTriangle" @click="showPopup"/>
@@ -27,6 +27,7 @@
                     <p>最多可绑定<em>20个</em>用水账户</p>
                 </div>
             </van-form>
+            <input class="camera" ref="camera" type="file" accept="image/*" capture="camera" multiple @change="handleClick">
         </div>
 
         <!-- 弹出框 -->
@@ -52,6 +53,8 @@
 <script>
 import scan from '../../assets/icon/scan@2x.png';
 import invertedTriangle from '../../assets/icon/invertedTriangle@2x.png';
+import axios from 'axios'
+import { Toast } from 'vant';
 
 export default {
     name: 'Bind',
@@ -95,8 +98,8 @@ export default {
        
         
     },
+    // keep-alive 时。
     activated () {
-        console.log('kkk--', this.$route.params.name )
         this.paymentUnit = this.$route.params &&  this.$route.params.name === 'undefined' ?  this.paymentUnit : this.$route.params.name 
     },
     methods: {
@@ -117,6 +120,40 @@ export default {
         // 标签
         showSelectSpan() {
 
+        },
+        getScan() {
+            this.$refs.camera.click();
+        },
+        // 扫描
+        handleClick() {
+            let file = this.$refs.camera.files[0];
+            if (!file) return;
+            this.loading = true;
+
+            console.log('上传文件前---', file)
+            var forms = new FormData();
+            forms.append('file', file)
+            let config = {
+                headers: {'Content-Type': 'multipart/form-data'}
+            };
+            axios.post('https://mp.weixin.qq.com/wxamusic/ocr/apidebug_imagequery?action=ocr_comm', forms, config)
+                .then (res => {
+                    console.log(res);
+                    this.loading = false;
+                    if (res.data.ocrcomm_res.items.length !== 0) {
+                        console.log('显示的数据--', res.data)
+                        Toast({
+                            message: '顶部展示',
+                            position: 'top',
+                        });
+                    } else {
+                        console.log('没数据--')
+                        this.accountNumber = ''
+                    }
+                }).catch(err => {
+                    console.log(err)
+                })
+    
         },
         goToUserInfoBind() {
             this.$router.push({
@@ -214,6 +251,10 @@ export default {
             color: #FFFFFF;
             text-align: center;
         }
+    }
+    .camera {
+        // visibility: hidden;
+        display: none;
     }
     .title {
         border-bottom: 1px solid #eeeeee;

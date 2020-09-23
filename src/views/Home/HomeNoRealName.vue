@@ -1,7 +1,7 @@
 <!--
  * @Author: zhouyajuan
  * @Date: 2020-08-20 08:21:56
- * @LastEditTime: 2020-09-21 09:43:35
+ * @LastEditTime: 2020-09-21 11:08:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-app-vant\src\views\Home\index.vue
@@ -25,7 +25,7 @@
 
             <div class="home-title-info">
                 <!-- 已绑定 -->
-                <div class="bound" >
+                <div class="bind" >
                     <div class="time-info">
                         <van-icon name="info-o" class="infoIcon"/>
                         <span>最后缴费日:</span>
@@ -243,8 +243,7 @@ export default {
         background: linear-gradient(to top, #CFE6FF, #FAFAFA);
         height: 205px;
         .home-header {
-            width: 100%;
-            padding: 5px 15px;
+            padding: 16px 15px;
             height: 45px;
             // line-height: 45px;
             margin-bottom: 25px;
@@ -314,7 +313,7 @@ export default {
             background: url('../../assets/pic_blue2@2x.png') no-repeat 0 0;
             background-size: cover;
             // 未绑定
-            .noBound {
+            .noBind {
                 padding-top: 30px;
                 padding-left: 20px;
                 padding-bottom: 18px;
@@ -326,7 +325,7 @@ export default {
                     line-height: 21px;
                     text-align: left;
                 }
-                .noBound-title {
+                .noBind-title {
                     width: 100%;
                     display: inline-block;
                     text-align: left;
@@ -386,7 +385,7 @@ export default {
                 }
             }
             // 已绑定
-            .bound {
+            .bind {
                 .time-info {
                     font-family: PingFangSC-Regular;
                     color: rgba(255,255,255,0.54);

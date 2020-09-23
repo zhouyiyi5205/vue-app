@@ -1,7 +1,7 @@
 <!--
  * @Author: zhouyajuan
  * @Date: 2020-08-20 08:21:56
- * @LastEditTime: 2020-09-21 09:45:07
+ * @LastEditTime: 2020-09-21 11:14:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-app-vant\src\views\Home\index.vue
@@ -26,27 +26,27 @@
 
             <div class="home-title-info">
                 <!-- 未绑定 -->
-                <!-- <div class="noBound">
+                <!-- <div class="noBind">
                     <p>您还未绑定任何水表</p>
-                    <div class="noBound-title">
+                    <div class="noBind-title">
                         <span>立即绑定享受用水的便捷之旅吧~</span>
                         <div class="quick-payment">
                             <em><img src="../../assets/icon/ic_living_expenses@2x.png" alt=""></em>
-                            <span @click="boundFn">立即绑定</span> 
+                            <span @click="bindFn">立即绑定</span> 
                             <van-icon name="arrow" class="arrowIcon"/>
                         </div>
                     </div>
                 </div> -->
                 <!-- 未绑定 -->
-                <div class="noBound">
-                    <div class="noBound-txt">
+                <div class="noBind">
+                    <div class="noBind-txt">
                         <p>您还未绑定任何水表</p>
                         <span>立即绑定享受用水的便捷之旅吧~</span>
                     </div>
                     
                     <div class="quick-payment">
                         <em><img src="../../assets/icon/ic_living_expenses@2x.png" alt=""></em>
-                        <span @click="boundFn">立即绑定</span> 
+                        <span @click="bindFn">立即绑定</span> 
                         <van-icon name="arrow" class="arrowIcon"/>
                     </div>
                 </div>
@@ -208,15 +208,19 @@ export default {
   },
   methods: {
     // 点击 -- 进入未实名已绑定
-    boundFn() {
+    bindFn() {
         this.$router.push({
-            path: `/Home/HomeNoRealName`
+            path: '/Bind'
         })
+        // 绑定完成后 --- 暂不需要
+        // this.$router.push({
+        //     path: `/Home/HomeNoRealName`
+        // })
     },
     // 点击 -- 进入已实名未绑定
     goToRealName() {
         this.$router.push({
-            path: `/Home/HomeNoBound`
+            path: `/Home/HomeNoBind`
         })
     },
     async initFn () {
@@ -253,11 +257,10 @@ export default {
         height: 165px;
         background: linear-gradient(to top, #CFE6FF, #FAFAFA);
         .home-header {
-            width: 100%;
-            padding: 5px 15px;
+            padding: 16px 15px;
             height: 45px;
             // line-height: 45px;
-             margin-bottom: 25px;
+            margin-bottom: 25px;
             // background-color: #F5F5F5;
             .leftInfo {
                 float: left;
@@ -324,12 +327,12 @@ export default {
             background: url('../../assets/pic_blue2@2x.png') no-repeat 0 0;
             background-size: cover;
             // 未绑定
-            .noBound {
+            .noBind {
                 padding-top: 30px;
                 padding-left: 20px;
                 padding-bottom: 18px;
                 position: relative;
-                .noBound-txt {
+                .noBind-txt {
                     p {
                         font-family: PingFangSC-Semibold;
                         font-size: 14px;
@@ -398,7 +401,7 @@ export default {
                 }
             }
             // 已绑定
-            .bound {
+            .bind {
                 .time-info {
                     font-family: PingFangSC-Regular;
                     color: rgba(255,255,255,0.54);

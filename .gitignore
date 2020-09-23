@@ -1,20 +1,15 @@
 .DS_Store
-
+node_modules/
+/dist/
+*.zip
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-test/unit/coverage
 
 # Editor directories and files
 .idea
+.vscode
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.vscode
-busi/**/dist/
-release/*
-!release/static
-
-index.html
-node_modules

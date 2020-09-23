@@ -1,12 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/views/HelloWorld'
-import Home from '@/views/Home'
 import Example from '@/views/Example'
 import IDCardExample from '@/views/Example/IDCardExample'
+import Home from '@/views/Home'
 import HomeNoRealName from '@/views/Home/HomeNoRealName'
-import HomeNoBound from '@/views/Home/HomeNoBound'
-import HomeAll from '@/views/Home/HomeAll'
+import HomeNoBind from '@/views/Home/HomeNoBind'
+import HomeAll from '@/views/Home/HomeAll';
+
+import Bind from '@/views/Bind';
+import SelectContent from '@/views/Bind/module/selectContent';
+import HouseholderInfo from '@/views/Bind/householderInfo';
 
 Vue.use(Router)
 
@@ -17,23 +21,39 @@ export default new Router({
       name: 'Home',
       component: Home
     },
-    // ---- 未实名已绑定
     {
       path: '/Home/HomeNoRealName',
       name: 'HomeNoRealName',
       component: HomeNoRealName
     },
-    //---- 已实名未绑定
     {
-      path: '/Home/HomeNoBound',
-      name: 'HomeNoBound',
-      component: HomeNoBound
+      path: '/Home/HomeNoBind',
+      name: 'HomeNoBind',
+      component: HomeNoBind
     },
-    // ----- 已实名已绑定
     {
       path: '/Home/HomeAll',
       name: 'HomeAll',
       component: HomeAll
+    },
+    {
+      path: '/Bind',
+      name: 'Bind',
+      component: Bind,
+    },
+    
+    {
+      path: '/Bind/householderInfo',
+      name: 'HouseholderInfo',
+      component: HouseholderInfo
+    },
+    {
+      path: '/Bind/module/selectContent',
+      name: 'SelectContent',
+      component: SelectContent,
+      // meta: {
+      //   keepAlive: false
+      // }
     },
     // ----- 示例路由 后期可删除
     {

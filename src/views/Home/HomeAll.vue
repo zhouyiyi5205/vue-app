@@ -1,7 +1,7 @@
 <!--
  * @Author: zhouyajuan
  * @Date: 2020-08-20 08:21:56
- * @LastEditTime: 2020-09-21 09:44:28
+ * @LastEditTime: 2020-09-21 11:06:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-app-vant\src\views\Home\index.vue
@@ -25,7 +25,7 @@
 
             <div class="home-title-info">
                 <!-- 已绑定 -->
-                <div class="bound" >
+                <div class="bind" >
                     <div class="time-info">
                         <van-icon name="info-o" class="infoIcon"/>
                         <span>最后缴费日:</span>
@@ -159,7 +159,7 @@ import business_Eleventh from '../../assets/icon/ic_水表迁移@2x.png';
 import business_Twelfth from '../../assets/icon/ic_口径变更@2x.png';
 
 export default {
-  name: 'HomeRealNameNoBound',
+  name: 'HomeRealNameNoBind',
   data () {
     return {
       show: false,
@@ -309,7 +309,7 @@ export default {
             background: url('../../assets/pic_golden@2x.png') no-repeat 0 0;
             background-size: cover;
             // 未绑定
-            .noBound {
+            .noBind {
                 padding-top: 30px;
                 padding-left: 20px;
                 padding-bottom: 18px;
@@ -321,7 +321,7 @@ export default {
                     line-height: 21px;
                     text-align: left;
                 }
-                .noBound-title {
+                .noBind-title {
                     width: 100%;
                     display: inline-block;
                     text-align: left;
@@ -381,7 +381,7 @@ export default {
                 }
             }
             // 已绑定
-            .bound {
+            .bind {
                 .time-info {
                     font-family: PingFangSC-Regular;
                     color: rgba(255,255,255,0.54);
